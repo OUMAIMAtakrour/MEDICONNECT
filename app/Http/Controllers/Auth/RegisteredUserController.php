@@ -33,7 +33,8 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
-           
+            'role' => ['required', 'string', 'max:255'],
+
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
@@ -41,7 +42,7 @@ class RegisteredUserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'last_name' => $request->last_name,
-        
+            'role' => $request->role,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
@@ -50,6 +51,12 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
+        if (Auth::user()->role == 'patient') {
+            return redirect()->route('home');
+        }
+        if (Auth::user()->role == 'doctor') {
+            return redirect()->route('docDash');
+        }
         return redirect(RouteServiceProvider::HOME);
     }
 }

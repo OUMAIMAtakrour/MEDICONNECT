@@ -23,42 +23,17 @@
 
 
         <!-- ROLE -->
-        <!-- <div class="mt-4">
-            <x-input-label for="role" :value="__('role')" />
-            <x-text-input id="role" class="block mt-1 w-full" type="text" name="role" :value="old('role')" required autocomplete="username" />
+
+
+
+        <div class="mt-4">
+            <x-input-label for="role" :value="__('Role')" />
+            <select id="role" class="block mt-1 w-full" name="role" required>
+                <option value="">Select a role</option>
+                <option value="patient">Patient</option>
+                <option value="doctor">Doctor</option>
+            </select>
             <x-input-error :messages="$errors->get('role')" class="mt-2" />
-        </div> -->
-
-
-        <div class=" mt-4">
-            <x-input-label for="role" :value="__('role')" />
-            <x-dropdown align="right" width="48">
-                <x-text-input id="role" class="block mt-1 w-full" type="text" name="role" :value="old('role')" required autocomplete="username" />
-
-                <x-slot name="trigger">
-
-                    <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                        <div>SPECIALTIES</div>
-
-                    </button>
-                </x-slot>
-
-                <x-slot name="content">
-
-
-                    <!-- Authentication -->
-
-
-                    <x-dropdown-link>
-                        CARDIOLOGUE
-                    </x-dropdown-link>
-                    <x-dropdown-link>
-                        CARDIOLOGUE
-                    </x-dropdown-link>
-
-
-                </x-slot>
-            </x-dropdown>
         </div>
 
 

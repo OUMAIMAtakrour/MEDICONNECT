@@ -29,8 +29,18 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        if (Auth::user()->role == 'admin') {
+            return redirect()->route('dashboard');
+        } elseif (Auth::user()->role == 'patient') {
+            return redirect()->route('home');
+        } elseif (Auth::user()->role == 'doctor') {
+            return redirect()->route('docDash');
+        }
+
+      
+        return redirect()->intended(config('fortify.home'));
     }
+
 
     /**
      * Destroy an authenticated session.
