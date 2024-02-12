@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\ProfileController;
+
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\Doctor;
 use App\Http\Middleware\Patient;
@@ -39,7 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 Route::get('/patient', [PatientController::class, 'index'])->name('home')->middleware('patient');
-Route::get('/doctor', 'DoctorController@index')->name('docDash')->middleware('doctor');
+Route::get('/doctor', [DoctorController::class, 'index'])->name('doctor')->middleware('doctor');
 Route::get('/admin', 'AdminController@index')->name('dashboard')->middleware('admin');
 
 // Route::get('/doctor', [DoctorController::class, 'index'])->name('docDash');
