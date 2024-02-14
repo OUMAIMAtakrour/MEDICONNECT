@@ -55,7 +55,7 @@ class RegisteredUserController extends Controller
             return redirect()->route('home');
         }
         if (Auth::user()->role == 'doctor') {
-            return redirect()->route('docDash');
+            return redirect()->route('doctor');
         }
         return redirect(RouteServiceProvider::HOME);
     }

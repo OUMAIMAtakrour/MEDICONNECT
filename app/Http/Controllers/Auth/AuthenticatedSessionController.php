@@ -34,10 +34,10 @@ class AuthenticatedSessionController extends Controller
         } elseif (Auth::user()->role == 'patient') {
             return redirect()->route('home');
         } elseif (Auth::user()->role == 'doctor') {
-            return redirect()->route('docDash');
+            return redirect()->route('doctor');
         }
 
-      
+
         return redirect()->intended(config('fortify.home'));
     }
 
