@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\MedicinesController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\ProfileController;
 
@@ -28,11 +29,23 @@ Route::get('/', function () {
 Route::get('/home', function () {
     return view('home');
 });
+Route::get('/comment', function () {
+    return view('patientsComment');
+});
 
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified', 'admin'])->name('dashboard');
+
+// Route::post('/create', [MedicinesController::class,"store"]);
+Route::get('/medicine', [MedicinesController::class, 'index'])->name('medicine');
+Route::get('/medicine/create', [MedicinesController::class, 'create'])->name('medicine.create');
+Route::post('/medicine', [MedicinesController::class, 'store'])->name('medicine.store');
+Route::get('/medicine/{id}/edit', [MedicinesController::class, 'edit'])->name('medicine.edit');
+
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -41,7 +54,7 @@ Route::middleware('auth')->group(function () {
 });
 Route::get('/patient', [PatientController::class, 'index'])->name('home')->middleware('patient');
 Route::get('/doctor', [DoctorController::class, 'index'])->name('doctor')->middleware('doctor');
-Route::get('/admin', 'AdminController@index')->name('dashboard')->middleware('admin');
+Route::get('/admin',[AdminController::class, 'index'])->name('dashboard')->middleware('admin');
 
 // Route::get('/doctor', [DoctorController::class, 'index'])->name('docDash');
 // Route::get('/patient', [PatientController::class, 'index'])->name('home');
